@@ -9,7 +9,7 @@ public class WaterSound : MonoBehaviour
     public float fadeSpeed = 2f;
 
     private AudioSource audioSource;
-    private int waterCount = 0; // counts how many water triggers we're inside
+    private int waterCount = 0;
     private Vector3 lastCameraPosition;
     private Transform cameraTransform;
     private bool isMoving = false;
@@ -59,6 +59,6 @@ public class WaterSound : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Water"))
-            waterCount = Mathf.Max(0, waterCount - 1); // never go below 0
+            waterCount = Mathf.Max(0, waterCount - 1);
     }
 }
