@@ -10,11 +10,12 @@ public class ButtonDoorController : MonoBehaviour
     [Header("Door Settings")]
     public Transform door;
     public float openYOffset = 3f;
-    public float openSpeed = 2f;
+    public float openDuration = 6f;
 
-    [Header("Audio (optional)")]
+    [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip doorOpenSound;
+    public float soundDuration = 7f;
 
     private HashSet<string> pressedButtons = new HashSet<string>();
     private Vector3 closedPosition;
@@ -51,19 +52,31 @@ public class ButtonDoorController : MonoBehaviour
         isDoorOpen = true;
 
         if (audioSource && doorOpenSound)
-            audioSource.PlayOneShot(doorOpenSound);
-
-        Vector3 targetPos = closedPosition + new Vector3(0, openYOffset, 0);
-
-        while (Vector3.Distance(door.localPosition, targetPos) > 0.01f)
         {
-            door.localPosition = Vector3.MoveTowards(
-                door.localPosition, targetPos, openSpeed * Time.deltaTime);
+            audioSource.PlayOneShot(doorOpenSound);
+            StartCoroutine(StopSoundAfter(soundDuration));
+        }
+
+        Vector3 startPos = door.localPosition;
+        Vector3 targetPos = startPos + new Vector3(0, openYOffset, 0);
+        float elapsed = 0f;
+
+        while (elapsed < openDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / openDuration;
+            door.localPosition = Vector3.Lerp(startPos, targetPos, t);
             yield return null;
         }
 
         door.localPosition = targetPos;
         isMoving = false;
         Debug.Log("[Door] Door is now open!");
+    }
+
+    private IEnumerator StopSoundAfter(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        audioSource.Stop();
     }
 }
