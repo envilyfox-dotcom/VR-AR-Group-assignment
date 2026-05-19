@@ -22,7 +22,7 @@ public class RotatableSocketObject : MonoBehaviour
     [SerializeField] private bool isGrabbed = false;
 
     private XRGrabInteractable grabInteractable;
-    private XRSocketInteractor currentSocket = null;  // track which socket we're in
+    private XRSocketInteractor currentSocket = null;
 
     private Quaternion targetRotation;
     private bool isRotating = false;
@@ -60,7 +60,7 @@ public class RotatableSocketObject : MonoBehaviour
     {
         if (rotateAction != null && rotateAction.WasPressedThisFrame())
         {
-            if (isInSocket || isGrabbed)
+            if ((isInSocket || isGrabbed) && SelectedObjectManager.Current == this)
                 RotateObject();
         }
 
@@ -85,26 +85,17 @@ public class RotatableSocketObject : MonoBehaviour
     {
         if (isInSocket && currentSocket != null)
         {
-            // KEY FIX: rotate the socket's attachTransform instead of this object.
-            // The socket drives our rotation from attachTransform, so rotating that
-            // moves us without the socket fighting us back every frame.
             Transform attach = currentSocket.attachTransform != null
                 ? currentSocket.attachTransform
                 : currentSocket.transform;
 
             if (smoothRotation)
-            {
-                // Store the target on the attach transform and drive it in a coroutine
                 StartCoroutine(SmoothRotateAttach(attach));
-            }
             else
-            {
                 attach.rotation *= Quaternion.Euler(rotationAxis * rotationStep);
-            }
         }
         else if (isGrabbed)
         {
-            // When grabbed the socket isn't controlling us, so rotate self normally
             targetRotation = transform.rotation * Quaternion.Euler(rotationAxis * rotationStep);
             if (smoothRotation)
                 isRotating = true;
@@ -139,12 +130,14 @@ public class RotatableSocketObject : MonoBehaviour
         if (socket != null)
         {
             isInSocket = true;
-            currentSocket = socket;   // remember which socket
+            currentSocket = socket;
         }
         else
         {
             isGrabbed = true;
         }
+
+        SelectedObjectManager.Select(this);
     }
 
     private void OnSelectExited(SelectExitEventArgs args)
@@ -153,11 +146,15 @@ public class RotatableSocketObject : MonoBehaviour
         if (socket != null)
         {
             isInSocket = false;
-            currentSocket = null;     // clear socket reference
+            currentSocket = null;
         }
         else
         {
             isGrabbed = false;
         }
+
+        // Only deselect if not still in a socket — keep focus while socketed
+        if (!isInSocket)
+            SelectedObjectManager.Deselect(this);
     }
 }
