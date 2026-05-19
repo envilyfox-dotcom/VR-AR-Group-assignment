@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;  // ADD THIS
 
 public class ButtonDoorController : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class ButtonDoorController : MonoBehaviour
     public AudioClip doorOpenSound;
     public float soundDuration = 7f;
 
+    [Header("Popup Text")]                          // ADD THIS BLOCK
+    public TextMeshProUGUI popupText;
+    public float popupDuration = 2f;
+    private Coroutine hideCoroutine;
+
     private HashSet<string> pressedButtons = new HashSet<string>();
     private Vector3 closedPosition;
     private bool isDoorOpen = false;
@@ -25,6 +31,7 @@ public class ButtonDoorController : MonoBehaviour
     void Start()
     {
         if (door) closedPosition = door.localPosition;
+        if (popupText) popupText.gameObject.SetActive(false);  // ADD THIS
     }
 
     public void RegisterButtonPress(string buttonID)
@@ -35,48 +42,35 @@ public class ButtonDoorController : MonoBehaviour
         pressedButtons.Add(buttonID);
         Debug.Log($"[Door] Button pressed: {buttonID} ({pressedButtons.Count}/{requiredButtonIDs.Count})");
 
+        ShowPopup();  // ADD THIS
+
         if (AllButtonsPressed() && !isDoorOpen && !isMoving)
             StartCoroutine(OpenDoor());
     }
 
-    private bool AllButtonsPressed()
+    // ADD THIS ENTIRE METHOD
+    private void ShowPopup()
     {
-        foreach (var id in requiredButtonIDs)
-            if (!pressedButtons.Contains(id)) return false;
-        return true;
+        if (!popupText) return;
+
+        int total = requiredButtonIDs.Count;
+        int found = pressedButtons.Count;
+
+        popupText.text = found >= total
+            ? "All buttons found!"
+            : $"{found}/{total} buttons found";
+
+        popupText.gameObject.SetActive(true);
+
+        if (hideCoroutine != null) StopCoroutine(hideCoroutine);
+        hideCoroutine = StartCoroutine(HidePopupAfterDelay());
     }
 
-    private IEnumerator OpenDoor()
+    // ADD THIS ENTIRE METHOD
+    private IEnumerator HidePopupAfterDelay()
     {
-        isMoving = true;
-        isDoorOpen = true;
-
-        if (audioSource && doorOpenSound)
-        {
-            audioSource.PlayOneShot(doorOpenSound);
-            StartCoroutine(StopSoundAfter(soundDuration));
-        }
-
-        Vector3 startPos = door.localPosition;
-        Vector3 targetPos = startPos + new Vector3(0, openYOffset, 0);
-        float elapsed = 0f;
-
-        while (elapsed < openDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / openDuration;
-            door.localPosition = Vector3.Lerp(startPos, targetPos, t);
-            yield return null;
-        }
-
-        door.localPosition = targetPos;
-        isMoving = false;
-        Debug.Log("[Door] Door is now open!");
+        yield return new WaitForSeconds(popupDuration);
+        if (popupText) popupText.gameObject.SetActive(false);
     }
 
-    private IEnumerator StopSoundAfter(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        audioSource.Stop();
-    }
-}
+    // ... rest of your existing code unchanged
