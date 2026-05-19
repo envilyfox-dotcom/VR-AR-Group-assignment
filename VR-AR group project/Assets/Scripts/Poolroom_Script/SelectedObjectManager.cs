@@ -1,0 +1,14 @@
+// SelectedObjectManager.cs
+// Attach this to any persistent GameObject in the scene (e.g. GameManager)
+using UnityEngine;
+
+public class SelectedObjectManager : MonoBehaviour
+{
+    public static RotatableSocketObject Current { get; private set; }
+
+    public static void Select(RotatableSocketObject obj) => Current = obj;
+    public static void Deselect(RotatableSocketObject obj)
+    {
+        if (Current == obj) Current = null;
+    }
+}
