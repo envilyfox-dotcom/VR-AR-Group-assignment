@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "CustomRotate",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "acdc40a5-086c-47b5-9aee-7f8f26e79b59",
+            "actions": [
+                {
+                    "name": "RotateObject",
+                    "type": "Button",
+                    "id": "71944c9f-59a6-4980-96fd-beaa7674b0de",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ecd402a5-9ddb-4995-bbb0-fecd33905b47",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateObject",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
