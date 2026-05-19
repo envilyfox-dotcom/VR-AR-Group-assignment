@@ -15,8 +15,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        // Replace "GameScene" with your actual scene name
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Level 1 Darren");
     }
 
     public void OpenSettings()
@@ -27,13 +26,12 @@ public class MenuManager : MonoBehaviour
 
     public void CloseSettings()
     {
-        settingsPanel.SetActive(true);
         mainPanel.SetActive(true);
+        settingsPanel.SetActive(false);
     }
 
     public void QuitGame()
     {
-        Debug.Log("[Menu] Quitting game...");
         Application.Quit();
     }
 }
