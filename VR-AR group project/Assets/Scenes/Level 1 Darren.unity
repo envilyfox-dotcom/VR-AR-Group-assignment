@@ -3132,17 +3132,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 264786386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba823bc984ec6141a8eecaa2841b3a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dab633d3e17e8449b03c4886de6026e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorButton
   buttonID: btn_red
   doorController: {fileID: 1311790509}
   buttonRenderer: {fileID: 3867257}
   pressedColor: {r: 1, g: 1, b: 1, a: 1}
-  indicatorLight: {fileID: 1513264115}
-  bulbRenderer: {fileID: 668393015}
-  bulbOnMaterial: {fileID: 2100000, guid: 72514df329d2d3843a98b2b6a3fa6f1b, type: 2}
-  bulbOffMaterial: {fileID: 2100000, guid: ee344a5c37ed98e45a4a4b62de6182e6, type: 2}
 --- !u!1001 &267880689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10122,17 +10118,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 848604195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba823bc984ec6141a8eecaa2841b3a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dab633d3e17e8449b03c4886de6026e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorButton
   buttonID: btn_blue
   doorController: {fileID: 1311790509}
   buttonRenderer: {fileID: 685126869}
   pressedColor: {r: 1, g: 1, b: 1, a: 1}
-  indicatorLight: {fileID: 843871368}
-  bulbRenderer: {fileID: 2083507250}
-  bulbOnMaterial: {fileID: 2100000, guid: 00658186269123b4392dfb70a5e96f3e, type: 2}
-  bulbOffMaterial: {fileID: 2100000, guid: ee344a5c37ed98e45a4a4b62de6182e6, type: 2}
 --- !u!1001 &849986461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13604,17 +13596,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1100380271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba823bc984ec6141a8eecaa2841b3a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dab633d3e17e8449b03c4886de6026e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorButton
   buttonID: btn_green
   doorController: {fileID: 1311790509}
   buttonRenderer: {fileID: 953573515}
   pressedColor: {r: 1, g: 1, b: 1, a: 1}
-  indicatorLight: {fileID: 1084733408}
-  bulbRenderer: {fileID: 599955976}
-  bulbOnMaterial: {fileID: 2100000, guid: 9fbd9b46544777348a0442cd10a37dd3, type: 2}
-  bulbOffMaterial: {fileID: 2100000, guid: ee344a5c37ed98e45a4a4b62de6182e6, type: 2}
 --- !u!4 &1101304497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 327581352244726910, guid: ec807b96996b3fd41aa49c89701cea61, type: 3}
