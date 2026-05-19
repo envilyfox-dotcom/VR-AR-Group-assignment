@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0de5ec4399fcbdd47b562410e5a280e4, type: 3}
   m_Name: 
+<<<<<<< Updated upstream
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
   mainPanel: {fileID: 958746213}
   settingsPanel: {fileID: 631841208}
@@ -254,6 +255,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolumeControl
   volumeSlider: {fileID: 784945427}
 --- !u!1 &77871245
+=======
+  m_EditorClassIdentifier: Assembly-CSharp::MenuManager1
+  mainPanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
+--- !u!1 &52668227
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
