@@ -1,8 +1,6 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public static class SharedResources
 {
+<<<<<<< HEAD
     // Your 3 main levels from Build Settings: 1, 2, 3
     public static int[] levelIndices = { 1, 2, 3 };
     public static int currentLevel = 0;
@@ -22,4 +20,9 @@ public static class SharedResources
             }
         }
     }
+=======
+    // 0 = SampleScene, 1 = MainMenu, 2 = Level 1 Darren, 3 = Workshop_Vann, 4 = regina
+    public static int[] sceneIndices = { 2, 3, 4 };
+    public static int sceneCount = 0;
+>>>>>>> parent of e1504a0 (trying to get the teleporter to work)
 }
