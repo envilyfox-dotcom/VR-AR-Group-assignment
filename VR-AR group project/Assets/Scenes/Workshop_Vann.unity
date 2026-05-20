@@ -1625,8 +1625,8 @@ Transform:
   m_GameObject: {fileID: 25485306}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.31, y: 9.73, z: -4.3720007}
-  m_LocalScale: {x: 2, y: 2, z: 0.7316}
+  m_LocalPosition: {x: -0.31, y: 9.73, z: -4.0632}
+  m_LocalScale: {x: 2.6064, y: 2, z: 0.7316}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 110933229}
@@ -6938,6 +6938,9 @@ Transform:
   - {fileID: 1742635235}
   - {fileID: 76642334}
   - {fileID: 448064865}
+  - {fileID: 113522965}
+  - {fileID: 594824608}
+  - {fileID: 1121621841}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &110933230
@@ -21649,7 +21652,7 @@ GameObject:
   - component: {fileID: 432067337}
   - component: {fileID: 432067336}
   - component: {fileID: 432067335}
-  - component: {fileID: 432067334}
+  - component: {fileID: 432067338}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -21657,27 +21660,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!135 &432067334
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432067333}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &432067335
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21750,6 +21732,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &432067338
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432067333}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &432298433
 GameObject:
   m_ObjectHideFlags: 0
@@ -22541,7 +22545,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e185608494f594597769ee188f0753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::XROriginSpawner
-  _stabilizationFrames: 10
+  _requiredStableFrames: 5
+  _stabilityThreshold: 0.001
+  _timeoutSeconds: 5
 --- !u!1 &443123825
 GameObject:
   m_ObjectHideFlags: 0
@@ -28419,8 +28425,8 @@ Transform:
   m_GameObject: {fileID: 575683820}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.31000042, y: 7.73, z: -4.3720007}
-  m_LocalScale: {x: 2, y: 2, z: 0.7316}
+  m_LocalPosition: {x: -0.31000042, y: 7.73, z: -4.0632}
+  m_LocalScale: {x: 2.6064, y: 2, z: 0.7316}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 110933229}
@@ -73015,7 +73021,7 @@ Transform:
   m_GameObject: {fileID: 1511382644}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 16.46819, y: 1.0180001, z: 34.003532}
+  m_LocalPosition: {x: 16.46819, y: 1.0180001, z: 34.01}
   m_LocalScale: {x: 2, y: 2, z: 0.73159987}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -74258,8 +74264,8 @@ Transform:
   m_GameObject: {fileID: 1538247058}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.31000042, y: 11.73, z: -4.3720007}
-  m_LocalScale: {x: 2, y: 2, z: 0.7316}
+  m_LocalPosition: {x: -0.31000042, y: 11.73, z: -4.0632}
+  m_LocalScale: {x: 2.6064, y: 2, z: 0.7316}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 110933229}
@@ -96191,7 +96197,7 @@ Transform:
   m_GameObject: {fileID: 2013391020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.892, z: -7.344}
+  m_LocalPosition: {x: 0, y: 1.892, z: -8.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -104809,5 +104815,4 @@ SceneRoots:
   - {fileID: 343285589}
   - {fileID: 2084210769}
   - {fileID: 22351057}
-  - {fileID: 681112774}
   - {fileID: 2013391022}

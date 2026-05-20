@@ -123,7 +123,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _AtmosphereThickness: 1.69
+    - _AtmosphereThickness: 0.26
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -151,8 +151,8 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _SunDisk: 2
-    - _SunSize: 0.15
-    - _SunSizeConvergence: 2.3
+    - _SunSize: 0.016
+    - _SunSizeConvergence: 6.13
     - _Surface: 0
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
@@ -161,8 +161,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GroundColor: {r: 0.70889485, g: 0.47508436, b: 0.32005352, a: 1}
-    - _SkyTint: {r: 0.85983825, g: 0.71142685, b: 0.5967879, a: 1}
+    - _GroundColor: {r: 0.24528301, g: 0.14945106, b: 0.0871603, a: 1}
+    - _SkyTint: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
