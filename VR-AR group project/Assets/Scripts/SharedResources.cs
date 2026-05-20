@@ -3,20 +3,21 @@ using UnityEngine.SceneManagement;
 
 public static class SharedResources
 {
-    // 0 = MainMenu, 1 = Level 1 Darren, 2 = Workshop_Vann, 3 = regina
-    public static int[] sceneIndices = { 1, 2, 3 };
-    public static int sceneCount = 0;
+    // Your 3 main levels from Build Settings: 1, 2, 3
+    public static int[] levelIndices = { 1, 2, 3 };
+    public static int currentLevel = 0;
 
+    // Automatically figure out which level we're on when a scene loads
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Init()
     {
         int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
 
-        for (int i = 0; i < sceneIndices.Length; i++)
+        for (int i = 0; i < levelIndices.Length; i++)
         {
-            if (sceneIndices[i] == currentBuildIndex)
+            if (levelIndices[i] == currentBuildIndex)
             {
-                sceneCount = i;
+                currentLevel = i;
                 break;
             }
         }

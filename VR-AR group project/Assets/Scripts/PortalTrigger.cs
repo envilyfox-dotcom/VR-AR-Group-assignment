@@ -5,10 +5,13 @@ public class PortalTrigger : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            SharedResources.sceneCount = (SharedResources.sceneCount + 1) % SharedResources.sceneIndices.Length;
-            SceneManager.LoadScene(SharedResources.sceneIndices[SharedResources.sceneCount]);
+            // Cycle to the next level: 0 -> 1 -> 2 -> 0
+            SharedResources.currentLevel = (SharedResources.currentLevel + 1) % SharedResources.levelIndices.Length;
+
+            int nextSceneIndex = SharedResources.levelIndices[SharedResources.currentLevel];
+            SceneManager.LoadScene(nextSceneIndex);
         }
     }
 }
