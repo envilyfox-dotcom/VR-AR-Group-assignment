@@ -28,6 +28,7 @@ public class PauseMenuController : MonoBehaviour
         menuCanvas.SetActive(false);
         settingsPanel.SetActive(false);
         mainButtonsPanel.SetActive(true);
+        Time.timeScale = 1f;
     }
 
     public void OpenSettings()
