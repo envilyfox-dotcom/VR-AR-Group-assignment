@@ -5,19 +5,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
-/// <summary>
-/// Attach this script to a manager GameObject in your scene.
-/// It listens to XRSocketInteractors and checks whether the correct
-/// object has been placed in each designated puzzle socket.
-///
-/// SETUP STEPS:
-/// 1. Create an empty GameObject called "PuzzleManager" and attach this script.
-/// 2. In the Inspector, add 3 entries to "Puzzle Sockets".
-///    - Socket:          drag the XRSocketInteractor on the wall
-///    - Required Object: drag the specific XR Grab Interactable that must go there
-///    - Label:           friendly name shown in the confirmation message (e.g. "Key", "Gem", "Rune")
-/// 3. Optionally wire OnPieceCorrect / OnPuzzleComplete UnityEvents to UI, audio, etc.
-/// </summary>
 public class PuzzleSocketManager : MonoBehaviour
 {
     [System.Serializable]
@@ -49,7 +36,6 @@ public class PuzzleSocketManager : MonoBehaviour
     [Tooltip("Fired once when all puzzle pieces are correctly placed.")]
     public UnityEvent OnPuzzleComplete;
 
-    // -----------------------------------------------------------------------
     private int _solvedCount = 0;
 
     private void OnEnable()
@@ -57,7 +43,6 @@ public class PuzzleSocketManager : MonoBehaviour
         foreach (var ps in puzzleSockets)
         {
             if (ps.socket == null) continue;
-            // Cache the puzzle socket reference so the lambda can close over it.
             var captured = ps;
             ps.socket.selectEntered.AddListener(_ => OnObjectPlaced(captured));
             ps.socket.selectExited.AddListener(_ => OnObjectRemoved(captured));
@@ -75,10 +60,8 @@ public class PuzzleSocketManager : MonoBehaviour
         }
     }
 
-    // -----------------------------------------------------------------------
     private void OnObjectPlaced(PuzzleSocket ps)
     {
-        // XRSocketInteractor.GetOldestInteractableSelected() returns what just landed.
         var placed = ps.socket.GetOldestInteractableSelected() as XRGrabInteractable;
 
         if (placed == null) return;
@@ -113,17 +96,17 @@ public class PuzzleSocketManager : MonoBehaviour
 
     private void OnObjectRemoved(PuzzleSocket ps)
     {
-        // If the correct piece is pulled back out, un-solve that slot.
         if (ps.isSolved)
         {
             ps.isSolved = false;
             _solvedCount = Mathf.Max(0, _solvedCount - 1);
+
+            string progress = $"{_solvedCount}/{puzzleSockets.Count}";
             Debug.Log($"↩ \"{ps.label}\" piece removed — puzzle reset to {_solvedCount}/{puzzleSockets.Count}.");
+            OnPieceCorrect?.Invoke(progress);
         }
     }
 
-    // -----------------------------------------------------------------------
-    /// <summary>Call from UI button or script to reset all puzzle state.</summary>
     public void ResetPuzzle()
     {
         foreach (var ps in puzzleSockets) ps.isSolved = false;

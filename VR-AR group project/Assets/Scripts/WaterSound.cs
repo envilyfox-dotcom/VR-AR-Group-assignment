@@ -10,14 +10,12 @@ public class WaterSound : MonoBehaviour
 
     private AudioSource audioSource;
     private int waterCount = 0;
-    private Vector3 lastCameraPosition;
-    private Transform cameraTransform;
+    private Vector3 lastPosition;
     private bool isMoving = false;
 
     void Start()
     {
-        cameraTransform = Camera.main.transform;
-        lastCameraPosition = cameraTransform.position;
+        lastPosition = transform.position;
 
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = splashSound;
@@ -29,10 +27,20 @@ public class WaterSound : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0f)
+        {
+            audioSource.Pause();
+            return;
+        }
+        else
+        {
+            audioSource.UnPause();
+        }
+
         if (waterCount > 0)
         {
-            Vector3 currentPos = cameraTransform.position;
-            Vector3 lastPos = lastCameraPosition;
+            Vector3 currentPos = transform.position;
+            Vector3 lastPos = lastPosition;
             currentPos.y = 0;
             lastPos.y = 0;
 
@@ -47,7 +55,7 @@ public class WaterSound : MonoBehaviour
         float targetVolume = isMoving ? maxVolume : 0f;
         audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume, fadeSpeed * Time.deltaTime);
 
-        lastCameraPosition = cameraTransform.position;
+        lastPosition = transform.position;
     }
 
     void OnTriggerEnter(Collider other)

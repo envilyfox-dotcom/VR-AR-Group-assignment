@@ -11,7 +11,7 @@ public class XROriginSpawner : MonoBehaviour
     [SerializeField] private float _stabilityThreshold = 0.001f;
 
     [Tooltip("Max seconds to wait for stability before placing anyway")]
-    [SerializeField] private float _timeoutSeconds = 5f;
+    [SerializeField] private float _timeoutSeconds = 15f;
 
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -68,12 +68,20 @@ public class XROriginSpawner : MonoBehaviour
         // --- STEP 4: Position ---
         Vector3 offset = camera.position - transform.position;
 
-        Vector3 newOriginPos = spawnPoint.transform.position;
-        newOriginPos.x -= offset.x;
-        newOriginPos.z -= offset.z;
-        newOriginPos.y = spawnPoint.transform.position.y; // don't subtract Y or origin goes underground
-
-        transform.position = newOriginPos;
+        // If camera offset is suspiciously large, tracking data is bad — skip offset
+        if (Mathf.Abs(offset.x) > 10f || Mathf.Abs(offset.z) > 10f)
+        {
+            Debug.LogWarning($"XROriginSpawner: Camera offset too large ({offset}), ignoring — placing directly at spawn point.");
+            transform.position = new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y, spawnPoint.transform.position.z);
+        }
+        else
+        {
+            Vector3 newOriginPos = spawnPoint.transform.position;
+            newOriginPos.x -= offset.x;
+            newOriginPos.z -= offset.z;
+            newOriginPos.y = spawnPoint.transform.position.y;
+            transform.position = newOriginPos;
+        }
 
         // --- STEP 5: Rotation ---
         float yawDiff = spawnPoint.transform.eulerAngles.y - camera.eulerAngles.y;

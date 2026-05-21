@@ -3,18 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Attach to a Canvas UI GameObject.
-/// Wire PuzzleSocketManager.OnPieceCorrect → this.ShowProgress(string)
-/// Wire PuzzleSocketManager.OnPieceIncorrect → this.ShowWrong()
-/// Wire PuzzleSocketManager.OnPuzzleComplete → this.ShowComplete()
-///
-/// SETUP:
-/// 1. Create a Canvas in your scene (World Space works best for XR).
-/// 2. Add a TextMeshPro Text child → assign to progressText.
-/// 3. (Optional) Add an Image child for the progress bar → assign to progressBar.
-/// 4. (Optional) Add a second TextMeshPro Text → assign to feedbackText.
-/// </summary>
 public class PuzzleIndicatorUI : MonoBehaviour
 {
     [Header("Text")]
@@ -37,7 +25,6 @@ public class PuzzleIndicatorUI : MonoBehaviour
     [Tooltip("How long the feedback text stays visible before fading.")]
     public float feedbackDuration = 2.5f;
 
-    // -----------------------------------------------------------------------
     private int _total;
     private Coroutine _feedbackRoutine;
 
@@ -52,14 +39,10 @@ public class PuzzleIndicatorUI : MonoBehaviour
         if (feedbackText) feedbackText.alpha = 0f;
     }
 
-    // -----------------------------------------------------------------------
-    // Called by PuzzleSocketManager.OnPieceCorrect(string progress)
-    // progress looks like "1/3", "2/3", "3/3"
     public void ShowProgress(string progress)
     {
         if (progressText) progressText.text = progress;
 
-        // Parse "n/total" → fill amount
         var parts = progress.Split('/');
         if (parts.Length == 2 &&
             int.TryParse(parts[0], out int solved) &&
@@ -67,24 +50,19 @@ public class PuzzleIndicatorUI : MonoBehaviour
         {
             if (progressBar) progressBar.fillAmount = (float)solved / total;
         }
-
-        ShowFeedback($"✔  {progress} correct!", correctColor);
     }
 
-    // Called by PuzzleSocketManager.OnPieceIncorrect(string msg)
     public void ShowWrong(string msg = "Wrong piece!")
     {
         ShowFeedback("✘  " + msg, incorrectColor);
     }
 
-    // Called by PuzzleSocketManager.OnPuzzleComplete
     public void ShowComplete()
     {
         ShowFeedback("🎉  Puzzle solved!", completeColor);
         if (progressText) progressText.color = completeColor;
     }
 
-    // -----------------------------------------------------------------------
     private void ShowFeedback(string message, Color color)
     {
         if (feedbackText == null) return;
