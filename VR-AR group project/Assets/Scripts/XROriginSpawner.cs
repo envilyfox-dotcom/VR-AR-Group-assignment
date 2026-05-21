@@ -33,6 +33,7 @@ public class XROriginSpawner : MonoBehaviour
 
         // --- STEP 2: Wait for XR tracking to stabilize ---
         Vector3 previousCamPos = camera.position;
+        Vector3 positionSum = Vector3.zero;
         int stableFrameCount = 0;
         float elapsed = 0f;
 
@@ -44,18 +45,29 @@ public class XROriginSpawner : MonoBehaviour
             float drift = Vector3.Distance(camera.position, previousCamPos);
 
             if (drift < _stabilityThreshold)
+            {
                 stableFrameCount++;
+                positionSum += camera.position; // accumulate while stable
+            }
             else
-                stableFrameCount = 0; // reset if camera is still moving
+            {
+                stableFrameCount = 0;
+                positionSum = Vector3.zero; // reset accumulation
+            }
 
             previousCamPos = camera.position;
 
             if (elapsed >= _timeoutSeconds)
             {
-                Debug.LogWarning("XROriginSpawner: Tracking stabilization timed out — placing anyway.");
+                Debug.LogWarning($"XROriginSpawner: Timed out after {_timeoutSeconds}s — camera pos: {camera.position}, stable frames: {stableFrameCount}");
+                yield return new WaitForSeconds(0.1f);
                 break;
             }
         }
+
+        // Use averaged position instead of instantaneous
+        Vector3 averagedCamPos = stableFrameCount > 0 ? positionSum / stableFrameCount : camera.position;
+        Vector3 offset = averagedCamPos - transform.position;
 
         // --- STEP 3: Find spawn point ---
         SpawnPoint spawnPoint = FindFirstObjectByType<SpawnPoint>();
@@ -66,7 +78,6 @@ public class XROriginSpawner : MonoBehaviour
         }
 
         // --- STEP 4: Position ---
-        Vector3 offset = camera.position - transform.position;
 
         // If camera offset is suspiciously large, tracking data is bad — skip offset
         if (Mathf.Abs(offset.x) > 10f || Mathf.Abs(offset.z) > 10f)
