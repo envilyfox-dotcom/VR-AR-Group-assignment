@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PauseMenuController : MonoBehaviour
     {
         isPaused = !isPaused;
         menuCanvas.SetActive(isPaused);
+        Time.timeScale = isPaused ? 0f : 1f;
 
         if (!isPaused)
         {
@@ -38,6 +40,12 @@ public class PauseMenuController : MonoBehaviour
     {
         settingsPanel.SetActive(false);
         mainButtonsPanel.SetActive(true);
+    }
+
+    public void RetryLevel()
+    {
+        Time.timeScale = 1f; // Must reset before loading or the scene starts frozen
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
