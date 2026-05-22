@@ -16783,12 +16783,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'FInd The
+  m_text: 'Find The
 
     Buttons'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6b9a415188fa16447bfb72415745fb37, type: 2}
-  m_sharedMaterial: {fileID: 7044370282241953208, guid: 6b9a415188fa16447bfb72415745fb37, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cd3732c215837e7489a37ebc8e53cd0f, type: 2}
+  m_sharedMaterial: {fileID: -18005618710286653, guid: cd3732c215837e7489a37ebc8e53cd0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16885,7 +16885,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7044370282241953208, guid: 6b9a415188fa16447bfb72415745fb37, type: 2}
+  - {fileID: -18005618710286653, guid: cd3732c215837e7489a37ebc8e53cd0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
