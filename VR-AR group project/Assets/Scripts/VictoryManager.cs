@@ -21,7 +21,7 @@ public class VictoryManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     private System.Collections.IEnumerator StopSoundAfter(float seconds)
