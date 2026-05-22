@@ -3,7 +3,7 @@ using UnityEngine;
 public class PuzzleMaster : MonoBehaviour
 {
     [Header("Correct Buttons (in order)")]
-    public GameObject[] correctButtons; // all 4 in order
+    public GameObject[] correctButtons;
 
     private int currentStage = 0;
 
@@ -20,7 +20,6 @@ public class PuzzleMaster : MonoBehaviour
         Debug.Log("Stage advanced to: " + currentStage);
     }
 
-    // Called by whichever LightToggleController turns lights back on
     public void OnLightsRestored()
     {
         Debug.Log("Lights restored, enabling button at stage: " + currentStage);
