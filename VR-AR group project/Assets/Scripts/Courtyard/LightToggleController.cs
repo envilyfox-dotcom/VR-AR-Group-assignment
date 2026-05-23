@@ -13,13 +13,19 @@ public class LightToggleController : MonoBehaviour
     [Header("Warning UI")]
     public GameObject warningTextObject;
 
-    [Header("Master Controller")]
-    public PuzzleMaster puzzleMaster;
-
     private bool isOn = true;
 
     public void TurnOff() => SetState(false);
     public void TurnOn() => SetState(true);
+
+    void Start()
+    {
+        // Sync isOn with actual state of quads in scene
+        if (quads.Length > 0 && quads[0] != null)
+            isOn = quads[0].activeSelf;
+
+        Debug.Log($"{gameObject.name} starting isOn={isOn}");
+    }
 
     public void Toggle()
     {
@@ -42,10 +48,6 @@ public class LightToggleController : MonoBehaviour
 
         if (warningTextObject != null && state)
             warningTextObject.SetActive(false);
-
-        // Tell the master to unlock the next correct button
-        if (state && puzzleMaster != null)
-            puzzleMaster.OnLightsRestored();
     }
 
     public bool IsOn() => isOn;

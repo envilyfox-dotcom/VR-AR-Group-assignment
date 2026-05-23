@@ -1,5 +1,7 @@
+// LightButton.cs
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit; // Remove if not using XR Toolkit
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class LightButton : MonoBehaviour
 {
@@ -7,30 +9,31 @@ public class LightButton : MonoBehaviour
 
     [Header("Settings")]
     public LightToggleController controller;
-    public ButtonAction action = ButtonAction.Toggle;
+    public ButtonAction action = ButtonAction.TurnOn;
 
-    // --- Option A: XR Interaction Toolkit ---
-    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;
+    [Header("Puzzle")]
+    public PuzzleMaster puzzleMaster;
+    public string colorTag; // "Blue", "Red", "Black"
+
+    [Header("Disable self after pressed")]
+    public bool disableAfterPress = true;
+
+    private XRSimpleInteractable interactable;
 
     void Awake()
     {
-        interactable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable>();
+        interactable = GetComponent<XRSimpleInteractable>();
         if (interactable != null)
             interactable.selectEntered.AddListener(OnButtonPressed);
     }
 
-    // --- Option B: Physics-based (no XR Toolkit needed) ---
     void OnTriggerEnter(Collider other)
     {
-        // Fires when the VR controller/hand enters the button collider
         if (other.CompareTag("PlayerHand") || other.CompareTag("GameController"))
             PerformAction();
     }
 
-    private void OnButtonPressed(SelectEnterEventArgs args)
-    {
-        PerformAction();
-    }
+    private void OnButtonPressed(SelectEnterEventArgs args) => PerformAction();
 
     private void PerformAction()
     {
@@ -42,5 +45,11 @@ public class LightButton : MonoBehaviour
             case ButtonAction.TurnOff: controller.TurnOff(); break;
             case ButtonAction.Toggle: controller.Toggle(); break;
         }
+
+        // Removed controller.IsOn() check — TurnOn always makes it true
+        if (puzzleMaster != null && !string.IsNullOrEmpty(colorTag) && action == ButtonAction.TurnOn)
+            puzzleMaster.OnLightsRestored(colorTag);
+        else
+            Debug.Log($"OnLightsRestored NOT called — puzzleMaster={puzzleMaster}, action={action}, colorTag='{colorTag}'");
     }
 }

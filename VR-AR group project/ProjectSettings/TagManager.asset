@@ -9,6 +9,9 @@ TagManager:
   - Trail
   - Wall
   - Water
+  - BlueButton
+  - RedButton
+  - BlackButton
   layers:
   - Default
   - TransparentFX
