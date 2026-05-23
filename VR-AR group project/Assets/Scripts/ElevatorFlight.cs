@@ -60,11 +60,10 @@ public class ElevatorFlight : MonoBehaviour
         isFlying = true;
         hasFlown = true;
 
-        // disable the button immediately
         if (buttonInteractable != null)
             buttonInteractable.enabled = false;
 
-        // show ledge after short delay
+        // show ledge before moving
         yield return new WaitForSeconds(ledgeDelay);
         if (ledge != null)
         {
@@ -72,31 +71,56 @@ public class ElevatorFlight : MonoBehaviour
             Debug.Log("Safety ledge appeared!");
         }
 
-        // fly elevator pieces + player up together
-        float startY = elevatorPieces[0].transform.position.y;
-        Debug.Log("Flying from Y: " + startY + " to Y: " + targetY);
-
+        // fly up
         while (true)
         {
             float currentY = elevatorPieces[0].transform.position.y;
 
-            if (currentY >= targetY)
-            {
-                // snap everything exactly to target
-                float diff = targetY - currentY;
-                MoveEverything(diff);
-                Debug.Log("Reached target Y: " + targetY);
-                break;
-            }
-
-            float moveAmount = flightSpeed * Time.deltaTime;
-            MoveEverything(moveAmount);
-            yield return null;
+        if (currentY >= targetY)
+        {
+            float diff = targetY - currentY;
+            MoveEverything(diff);
+            Debug.Log("Reached target Y: " + targetY);
+            break;
         }
+
+        float moveAmount = flightSpeed * Time.deltaTime;
+        MoveEverything(moveAmount);
+        yield return null;
+    }
 
         isFlying = false;
         Debug.Log("Elevator stopped!");
+
+        // wait a moment so player settles
+        yield return new WaitForSeconds(1f);
+
+        // retract the ledge
+        Debug.Log("Retracting ledge...");
+        yield return StartCoroutine(RetractLedge());
     }
+
+    IEnumerator RetractLedge()
+{
+    if (ledge == null) yield break;
+
+    float retractSpeed = 2f;         // how fast ledge slides away
+    Vector3 startPos = ledge.transform.position;
+
+    // slide it downward by 1 unit then disable it
+    Vector3 endPos = startPos + Vector3.down * 1f;
+
+    float t = 0f;
+    while (t < 1f)
+    {
+        t += Time.deltaTime * retractSpeed;
+        ledge.transform.position = Vector3.Lerp(startPos, endPos, t);
+        yield return null;
+    }
+
+    ledge.SetActive(false);
+    Debug.Log("Ledge retracted — player can exit!");
+}
 
     void MoveEverything(float amount)
     {
