@@ -15,6 +15,9 @@ public class ElevatorBuilder : MonoBehaviour
 
     public static ElevatorBuilder Instance;
 
+    [Header("Flight System")]
+    public ElevatorFlight elevatorFlight;
+
     void Awake()
     {
         Instance = this;
@@ -72,6 +75,10 @@ public class ElevatorBuilder : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Debug.Log("Elevator is ready to use!");
-        // hook in any extra logic here e.g. unlock elevator doors
+
+        if (elevatorFlight != null)
+            elevatorFlight.OnElevatorComplete();
+        else
+            Debug.LogError("ElevatorFlight not assigned in ElevatorBuilder!");
     }
 }   

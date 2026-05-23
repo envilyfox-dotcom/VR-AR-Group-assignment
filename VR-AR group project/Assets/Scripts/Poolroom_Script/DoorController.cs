@@ -21,6 +21,9 @@ public class DoorController : MonoBehaviour
     private float closedAngle;
     private XRBaseInteractable interactable;
 
+    public AudioClip openSound;
+    public AudioClip closeSound;
+
     void Start()
     {
         // store the starting angle as the closed angle
