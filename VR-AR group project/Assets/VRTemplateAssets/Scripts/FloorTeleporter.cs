@@ -1,6 +1,7 @@
 using System.Collections;
-using UnityEngine;
 using Unity.XR.CoreUtils;
+using UnityEngine;
+using UnityEngine.Audio;
 
 public class FloorTeleporter : MonoBehaviour
 {
@@ -12,11 +13,18 @@ public class FloorTeleporter : MonoBehaviour
     public Color padActiveColor = Color.cyan;
     public Color padCooldownColor = Color.red;
 
+    [Header("Audio")]
+    public AudioClip teleportSound;
+    [Range(0f, 1f)] public float volume = 1f;
+
     private bool isReady = true;
     private bool playerOnPad = false;
     private Renderer padRenderer;
     private Color originalColor;
     private XROrigin xrOrigin;
+    private AudioSource audioSource;
+
+    public AudioMixerGroup teleportMixerGroup;
 
     void Start()
     {
@@ -26,6 +34,13 @@ public class FloorTeleporter : MonoBehaviour
             originalColor = padRenderer.material.color;
             padRenderer.material.color = padActiveColor;
         }
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 1f;
+        audioSource.volume = volume;
+
+        audioSource.outputAudioMixerGroup = teleportMixerGroup;
 
         xrOrigin = FindFirstObjectByType<XROrigin>();
 
@@ -39,7 +54,6 @@ public class FloorTeleporter : MonoBehaviour
         else
             Debug.Log(gameObject.name + " destination: " + destination.name);
 
-        // check this pad has a trigger collider
         Collider col = GetComponent<Collider>();
         if (col == null)
             Debug.LogError("NO COLLIDER on pad: " + gameObject.name);
@@ -49,7 +63,6 @@ public class FloorTeleporter : MonoBehaviour
             Debug.Log("Collider OK on: " + gameObject.name);
     }
 
-    // catches ANYTHING entering — no tag filter yet
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Something entered " + gameObject.name + " trigger: " + other.gameObject.name + " tag: " + other.gameObject.tag);
@@ -94,6 +107,12 @@ public class FloorTeleporter : MonoBehaviour
         xrOrigin.transform.position = destination.position - headOffset;
 
         Debug.Log("XROrigin moved to: " + xrOrigin.transform.position);
+
+        // Play sound after teleport
+        if (teleportSound != null)
+            audioSource.PlayOneShot(teleportSound, volume);
+        else
+            Debug.LogWarning("No teleport sound assigned on: " + gameObject.name);
 
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => !playerOnPad);
