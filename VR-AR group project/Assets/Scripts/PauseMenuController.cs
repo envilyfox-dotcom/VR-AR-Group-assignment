@@ -8,7 +8,7 @@ public class PauseMenuController : MonoBehaviour
     public GameObject mainButtonsPanel;
 
     [Header("UI Click Sound")]
-    public AudioSource uiAudioSource; // Assign an AudioSource on this GameObject
+    public AudioSource uiAudioSource;
     public AudioClip buttonClickClip;
 
     private bool isPaused = false;
@@ -16,20 +16,14 @@ public class PauseMenuController : MonoBehaviour
     private void Awake()
     {
         if (uiAudioSource != null)
-        {
-            // This AudioSource will keep playing even when AudioListener is paused
             uiAudioSource.ignoreListenerPause = true;
-        }
     }
 
     public void TogglePause()
     {
         isPaused = !isPaused;
         menuCanvas.SetActive(isPaused);
-
         Time.timeScale = isPaused ? 0f : 1f;
-
-        // Pause all game audio, but NOT sources with ignoreListenerPause = true
         AudioListener.pause = isPaused;
 
         if (!isPaused)
@@ -41,6 +35,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void Resume()
     {
+        PlayClickSound();
         isPaused = false;
         menuCanvas.SetActive(false);
         settingsPanel.SetActive(false);
@@ -65,18 +60,18 @@ public class PauseMenuController : MonoBehaviour
 
     public void RetryLevel()
     {
+        PlayClickSound();
         Time.timeScale = 1f;
         AudioListener.pause = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void QuitGame()
+    public void GoToMainMenu()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        PlayClickSound();
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void PlayClickSound()
