@@ -1,5 +1,3 @@
-// SelectedObjectManager.cs
-// Attach this to any persistent GameObject in the scene (e.g. GameManager)
 using UnityEngine;
 
 public class SelectedObjectManager : MonoBehaviour
@@ -10,5 +8,9 @@ public class SelectedObjectManager : MonoBehaviour
     public static void Deselect(RotatableSocketObject obj)
     {
         if (Current == obj) Current = null;
+    }
+    void OnDisable()
+    {
+        Current = null;
     }
 }

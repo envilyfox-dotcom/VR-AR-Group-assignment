@@ -9,8 +9,6 @@ public class PortalTrigger : MonoBehaviour
 
         int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
 
-        // Always derive currentLevel from the actual loaded scene,
-        // don't trust the static value
         int resolvedLevel = -1;
         for (int i = 0; i < SharedResources.levelIndices.Length; i++)
         {

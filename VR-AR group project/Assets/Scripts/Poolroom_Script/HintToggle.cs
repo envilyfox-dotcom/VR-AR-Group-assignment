@@ -7,8 +7,11 @@ public class HintToggle : MonoBehaviour
 
     public void ToggleHint()
     {
+        Debug.Log("ToggleHint called, hintPanel: " + hintPanel);
+
         hintPanel.SetActive(!hintPanel.activeSelf);
 
-        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
     }
 }
