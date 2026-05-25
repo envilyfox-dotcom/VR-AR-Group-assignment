@@ -16570,7 +16570,7 @@ MonoBehaviour:
   - btn_blue
   - btn_green
   door: {fileID: 579837459}
-  openYOffset: 3
+  openYOffset: 5
   openDuration: 7
   audioSource: {fileID: 1311790511}
   doorOpenSound: {fileID: 8300000, guid: 83497e50c64a9174e951e8ed00219096, type: 3}
