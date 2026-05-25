@@ -64,7 +64,6 @@ public class RotatableSocketObject : MonoBehaviour
                 RotateObject();
         }
 
-        // Only smooth-rotate the object directly when grabbed (not socketed)
         if (smoothRotation && isRotating && !isInSocket)
         {
             transform.rotation = Quaternion.RotateTowards(
@@ -153,7 +152,6 @@ public class RotatableSocketObject : MonoBehaviour
             isGrabbed = false;
         }
 
-        // Only deselect if not still in a socket — keep focus while socketed
         if (!isInSocket)
             SelectedObjectManager.Deselect(this);
     }
