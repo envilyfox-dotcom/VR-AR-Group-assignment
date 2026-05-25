@@ -30,7 +30,6 @@ public class PuzzleIndicatorUI : MonoBehaviour
 
     private void Start()
     {
-        // Auto-detect total from the manager if available.
         var mgr = FindFirstObjectByType<PuzzleSocketManager>();
         _total = mgr != null ? mgr.puzzleSockets.Count : 3;
 

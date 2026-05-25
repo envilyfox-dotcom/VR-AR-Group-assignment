@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
+    [Header("XR Respawn")]
+    public XROriginSpawner xrOriginSpawner;
+    public SpawnPoint spawnPoint;
+
     public GameObject menuCanvas;
     public GameObject settingsPanel;
     public GameObject mainButtonsPanel;
@@ -63,6 +67,7 @@ public class PauseMenuController : MonoBehaviour
         PlayClickSound();
         Time.timeScale = 1f;
         AudioListener.pause = false;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

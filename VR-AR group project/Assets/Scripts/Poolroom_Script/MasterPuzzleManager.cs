@@ -1,18 +1,6 @@
-// MasterPuzzleManager.cs
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Simple counter — call NotifyPuzzleSolved() from BOTH puzzles' OnPuzzleComplete /
-/// OnPuzzleSolved UnityEvents in the Inspector. When it has been called twice,
-/// OnBothPuzzlesSolved fires (which you wire to DoorController.OpenDoor).
-///
-/// SETUP:
-/// 1. Attach this to a new empty GameObject "MasterPuzzleManager".
-/// 2. On PuzzleSocketManager  → OnPuzzleComplete  → MasterPuzzleManager.NotifyPuzzleSolved()
-/// 3. On ClockPuzzleManager   → OnPuzzleSolved    → MasterPuzzleManager.NotifyPuzzleSolved()
-/// 4. On MasterPuzzleManager  → OnBothPuzzlesSolved → DoorController.OpenDoor()
-/// </summary>
 public class MasterPuzzleManager : MonoBehaviour
 {
     [Header("Events")]
@@ -22,15 +10,9 @@ public class MasterPuzzleManager : MonoBehaviour
     [Tooltip("Optional — fired when the first puzzle is solved.")]
     public UnityEvent OnFirstPuzzleSolved;
 
-    // -----------------------------------------------------------------------
     private int _solvedCount = 0;
     private bool _allSolved = false;
 
-    // -----------------------------------------------------------------------
-    /// <summary>
-    /// Wire this to OnPuzzleComplete (PuzzleSocketManager)
-    /// AND OnPuzzleSolved (ClockPuzzleManager) in the Inspector.
-    /// </summary>
     public void NotifyPuzzleSolved()
     {
         if (_allSolved) return;
@@ -51,7 +33,6 @@ public class MasterPuzzleManager : MonoBehaviour
         }
     }
 
-    // -----------------------------------------------------------------------
     public void ResetAll()
     {
         _solvedCount = 0;

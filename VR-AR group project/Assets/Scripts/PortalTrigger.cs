@@ -1,5 +1,4 @@
-﻿// PortalTrigger.cs
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PortalTrigger : MonoBehaviour

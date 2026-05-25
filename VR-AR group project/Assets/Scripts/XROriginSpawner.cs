@@ -4,100 +4,82 @@ using System.Collections;
 
 public class XROriginSpawner : MonoBehaviour
 {
-    [Tooltip("How many consecutive stable frames before we consider tracking ready")]
-    [SerializeField] private int _requiredStableFrames = 5;
-
-    [Tooltip("Max camera drift per frame (meters) to be considered stable")]
-    [SerializeField] private float _stabilityThreshold = 0.001f;
-
-    [Tooltip("Max seconds to wait for stability before placing anyway")]
+    [Tooltip("Max seconds to wait for camera before placing anyway")]
     [SerializeField] private float _timeoutSeconds = 15f;
+
+    [Tooltip("How many stable frames to wait before placing")]
+    [SerializeField] private int _requiredStableFrames = 3;
+
+    [Tooltip("Max camera drift per frame to be considered stable")]
+    [SerializeField] private float _stabilityThreshold = 0.002f;
 
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        StartCoroutine(PlaceXROrigin());
-    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) => StartCoroutine(PlaceXROrigin());
 
     IEnumerator PlaceXROrigin()
     {
-        // --- STEP 1: Wait for Camera.main to exist ---
         Transform camera = null;
+        float elapsed = 0f;
         while (camera == null)
         {
             camera = Camera.main?.transform;
+            elapsed += Time.deltaTime;
+            if (elapsed > _timeoutSeconds)
+            {
+                Debug.LogError("XROriginSpawner: Camera never found!");
+                yield break;
+            }
             yield return null;
         }
 
-        // --- STEP 2: Wait for XR tracking to stabilize ---
-        Vector3 previousCamPos = camera.position;
-        Vector3 positionSum = Vector3.zero;
-        int stableFrameCount = 0;
-        float elapsed = 0f;
+        Vector3 prevPos = camera.position;
+        int stableFrames = 0;
+        elapsed = 0f;
 
-        while (stableFrameCount < _requiredStableFrames)
+        while (stableFrames < _requiredStableFrames)
         {
             yield return null;
             elapsed += Time.deltaTime;
 
-            float drift = Vector3.Distance(camera.position, previousCamPos);
-
-            if (drift < _stabilityThreshold)
-            {
-                stableFrameCount++;
-                positionSum += camera.position; // accumulate while stable
-            }
-            else
-            {
-                stableFrameCount = 0;
-                positionSum = Vector3.zero; // reset accumulation
-            }
-
-            previousCamPos = camera.position;
+            float drift = Vector3.Distance(camera.position, prevPos);
+            stableFrames = drift < _stabilityThreshold ? stableFrames + 1 : 0;
+            prevPos = camera.position;
 
             if (elapsed >= _timeoutSeconds)
             {
-                Debug.LogWarning($"XROriginSpawner: Timed out after {_timeoutSeconds}s — camera pos: {camera.position}, stable frames: {stableFrameCount}");
-                yield return new WaitForSeconds(0.1f);
+                Debug.LogWarning("XROriginSpawner: Timed out, placing anyway.");
                 break;
             }
         }
 
-        // Use averaged position instead of instantaneous
-        Vector3 averagedCamPos = stableFrameCount > 0 ? positionSum / stableFrameCount : camera.position;
-        Vector3 offset = averagedCamPos - transform.position;
-
-        // --- STEP 3: Find spawn point ---
         SpawnPoint spawnPoint = FindFirstObjectByType<SpawnPoint>();
         if (spawnPoint == null)
         {
-            Debug.LogError("XROriginSpawner: No SpawnPoint found in scene!");
+            Debug.LogError("XROriginSpawner: No SpawnPoint found!");
             yield break;
         }
 
-        // --- STEP 4: Position ---
+        PlaceAtSpawn(camera, spawnPoint.transform);
+    }
 
-        // If camera offset is suspiciously large, tracking data is bad — skip offset
-        if (Mathf.Abs(offset.x) > 10f || Mathf.Abs(offset.z) > 10f)
-        {
-            Debug.LogWarning($"XROriginSpawner: Camera offset too large ({offset}), ignoring — placing directly at spawn point.");
-            transform.position = new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y, spawnPoint.transform.position.z);
-        }
-        else
-        {
-            Vector3 newOriginPos = spawnPoint.transform.position;
-            newOriginPos.x -= offset.x;
-            newOriginPos.z -= offset.z;
-            newOriginPos.y = spawnPoint.transform.position.y;
-            transform.position = newOriginPos;
-        }
+    public void PlaceAtSpawn(Transform camera, Transform spawnPoint)
+    {
+        Vector3 cameraOffsetFromOrigin = camera.position - transform.position;
 
-        // --- STEP 5: Rotation ---
-        float yawDiff = spawnPoint.transform.eulerAngles.y - camera.eulerAngles.y;
+        Vector3 horizontalOffset = new Vector3(cameraOffsetFromOrigin.x, 0f, cameraOffsetFromOrigin.z);
+
+        transform.position = new Vector3(
+            spawnPoint.position.x - horizontalOffset.x,
+            spawnPoint.position.y,
+            spawnPoint.position.z - horizontalOffset.z
+        );
+
+        // Rotate the rig so the camera faces the spawn point's forward direction
+        float yawDiff = spawnPoint.eulerAngles.y - camera.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y + yawDiff, 0f);
 
-        Debug.Log($"XROriginSpawner: Placed at {transform.position}. Camera at {camera.position}, yaw: {camera.eulerAngles.y}");
+        Debug.Log($"XROriginSpawner: Camera placed at {camera.position} facing {camera.eulerAngles.y}°");
     }
 }

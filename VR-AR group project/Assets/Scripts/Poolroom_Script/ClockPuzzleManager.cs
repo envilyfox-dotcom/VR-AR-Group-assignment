@@ -1,4 +1,3 @@
-// ClockPuzzleManager.cs
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
@@ -44,7 +43,6 @@ public class ClockPuzzleManager : MonoBehaviour
         bool hourCorrect = CheckSocket(hourSocket, ArrowType.Type.Hour, hourTargetAngle);
         bool minuteCorrect = CheckSocket(minuteSocket, ArrowType.Type.Minute, minuteTargetAngle);
 
-        // Fire hour events when state changes
         if (hourCorrect != wasHourCorrect)
         {
             wasHourCorrect = hourCorrect;
@@ -60,7 +58,6 @@ public class ClockPuzzleManager : MonoBehaviour
             }
         }
 
-        // Fire minute events when state changes
         if (minuteCorrect != wasMinuteCorrect)
         {
             wasMinuteCorrect = minuteCorrect;
@@ -76,7 +73,6 @@ public class ClockPuzzleManager : MonoBehaviour
             }
         }
 
-        // Both correct — puzzle solved
         if (hourCorrect && minuteCorrect)
         {
             isSolved = true;
@@ -123,7 +119,6 @@ public class ClockPuzzleManager : MonoBehaviour
         return diff <= angleTolerance;
     }
 
-    /// <summary>Call from UI button or script to reset the puzzle state.</summary>
     public void ResetPuzzle()
     {
         isSolved = false;

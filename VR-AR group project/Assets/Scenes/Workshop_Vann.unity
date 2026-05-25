@@ -8747,6 +8747,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7008489309360866698, guid: d1d896bf3338b2e45b49da324d693acf, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 2013391021}
+    - target: {fileID: 7008489309360866698, guid: d1d896bf3338b2e45b49da324d693acf, type: 3}
       propertyPath: uiAudioSource
       value: 
       objectReference: {fileID: 1196656480}
@@ -8754,6 +8758,10 @@ PrefabInstance:
       propertyPath: buttonClickClip
       value: 
       objectReference: {fileID: 8300000, guid: 108a7f0830cbc8c41b7e6ad0c0694f78, type: 3}
+    - target: {fileID: 7008489309360866698, guid: d1d896bf3338b2e45b49da324d693acf, type: 3}
+      propertyPath: xrOriginSpawner
+      value: 
+      objectReference: {fileID: 441087525}
     - target: {fileID: 7282127293163559217, guid: d1d896bf3338b2e45b49da324d693acf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -23062,9 +23070,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e185608494f594597769ee188f0753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::XROriginSpawner
-  _requiredStableFrames: 5
-  _stabilityThreshold: 0.001
   _timeoutSeconds: 10
+  _requiredStableFrames: 15
+  _stabilityThreshold: 0.005
 --- !u!1 &443123825
 GameObject:
   m_ObjectHideFlags: 0
