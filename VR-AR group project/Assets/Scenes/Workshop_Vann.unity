@@ -4054,6 +4054,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 195468, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
       insertIndex: -1
       addedObject: {fileID: 78229891}
+    - targetCorrespondingSourceObject: {fileID: 195468, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 78229892}
   m_SourcePrefab: {fileID: 100100000, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
 --- !u!4 &78229882 stripped
 Transform:
@@ -4351,6 +4354,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &78229892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78229883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d758a05bf2609f3428a8873f56d3f8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResetOnDrop
+  resetY: -5
 --- !u!1 &79857982
 GameObject:
   m_ObjectHideFlags: 0
@@ -37110,6 +37126,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 195468, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
       insertIndex: -1
       addedObject: {fileID: 760518088}
+    - targetCorrespondingSourceObject: {fileID: 195468, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 760518089}
   m_SourcePrefab: {fileID: 100100000, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
 --- !u!4 &760518079 stripped
 Transform:
@@ -37407,6 +37426,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &760518089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760518080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d758a05bf2609f3428a8873f56d3f8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResetOnDrop
+  resetY: -5
 --- !u!1 &765328365
 GameObject:
   m_ObjectHideFlags: 0
@@ -44906,6 +44938,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 195468, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
       insertIndex: -1
       addedObject: {fileID: 923443623}
+    - targetCorrespondingSourceObject: {fileID: 195468, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 923443624}
   m_SourcePrefab: {fileID: 100100000, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
 --- !u!4 &923443614 stripped
 Transform:
@@ -45203,6 +45238,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &923443624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923443615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d758a05bf2609f3428a8873f56d3f8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResetOnDrop
+  resetY: -5
 --- !u!1 &923821348
 GameObject:
   m_ObjectHideFlags: 0
@@ -49758,6 +49806,7 @@ GameObject:
   - component: {fileID: 1025556252}
   - component: {fileID: 1025556253}
   - component: {fileID: 1025556254}
+  - component: {fileID: 1025556255}
   m_Layer: 0
   m_Name: Arrow Long
   m_TagString: Untagged
@@ -50103,6 +50152,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1025556255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025556246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d758a05bf2609f3428a8873f56d3f8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResetOnDrop
+  resetY: -5
 --- !u!1 &1032145903
 GameObject:
   m_ObjectHideFlags: 0
@@ -55807,6 +55869,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 195468, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1129260239}
+    - targetCorrespondingSourceObject: {fileID: 195468, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1129260240}
   m_SourcePrefab: {fileID: 100100000, guid: a30fd9cfcc5c0b143aa308e06fdc1407, type: 3}
 --- !u!4 &1129260230 stripped
 Transform:
@@ -56104,6 +56169,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1129260240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129260231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d758a05bf2609f3428a8873f56d3f8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResetOnDrop
+  resetY: -5
 --- !u!1 &1132446416
 GameObject:
   m_ObjectHideFlags: 0
@@ -62231,6 +62309,7 @@ GameObject:
   - component: {fileID: 1246474272}
   - component: {fileID: 1246474273}
   - component: {fileID: 1246474274}
+  - component: {fileID: 1246474275}
   m_Layer: 0
   m_Name: Arrow Short
   m_TagString: Untagged
@@ -62576,6 +62655,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1246474275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246474266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d758a05bf2609f3428a8873f56d3f8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResetOnDrop
+  resetY: -5
 --- !u!1 &1248909903
 GameObject:
   m_ObjectHideFlags: 0
