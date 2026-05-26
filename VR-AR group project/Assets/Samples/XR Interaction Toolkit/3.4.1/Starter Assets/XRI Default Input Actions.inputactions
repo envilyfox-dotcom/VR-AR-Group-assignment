@@ -1394,61 +1394,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "2663fb28-8bc7-4346-8ceb-42d51a44e523",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "20090268-e590-4932-8ee6-81f0ab41c396",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "6c55788d-14bc-4bbf-8ad4-8d519cb1a13a",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "2d788a0d-e8b8-4ae2-9588-458000a8558b",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "dfb7f0c2-93cb-4413-9531-6acdc17e7d39",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "9e2fa814-8cbd-4c65-a60d-a1503f30ffd8",
                     "path": "<XRController>{LeftHand}/{GripButton}",
@@ -3475,6 +3420,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Rotate",
+                    "type": "Button",
+                    "id": "301d7cc6-0af3-4d82-aa89-65b44dc99c61",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -3497,6 +3451,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MenuButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64dd4ce6-a95b-4eeb-be04-340632895ad6",
+                    "path": "<XRInputV1::Oculus::OculusTouchControllerOpenXR>{RightHand}/secondarybutton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

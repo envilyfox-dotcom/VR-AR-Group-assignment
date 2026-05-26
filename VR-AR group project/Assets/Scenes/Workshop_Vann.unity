@@ -37712,10 +37712,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleIndicatorUI
   progressText: {fileID: 304148129}
   feedbackText: {fileID: 0}
-  progressBar: {fileID: 0}
-  correctColor: {r: 0.2, g: 0.85, b: 0.4, a: 1}
-  incorrectColor: {r: 0.95, g: 0.3, b: 0.25, a: 1}
-  completeColor: {r: 1, g: 0.85, b: 0.1, a: 1}
   feedbackDuration: 2.5
 --- !u!114 &769164645
 MonoBehaviour:
@@ -49968,7 +49964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1212b395e98fcf47ae6e1d05a28356b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotatableSocketObject
-  rotateActionReference: {fileID: -8069514856583376848, guid: b6d5c44ebe3244b7692e81ae8265eb22, type: 3}
+  rotateActionReference: {fileID: -6863092062506366388, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   rotationAxis: {x: 0, y: 0, z: 1}
   rotationStep: 90
   smoothRotation: 1
@@ -62441,7 +62437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1212b395e98fcf47ae6e1d05a28356b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotatableSocketObject
-  rotateActionReference: {fileID: -8069514856583376848, guid: b6d5c44ebe3244b7692e81ae8265eb22, type: 3}
+  rotateActionReference: {fileID: -6863092062506366388, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   rotationAxis: {x: 0, y: 0, z: 1}
   rotationStep: 90
   smoothRotation: 1
